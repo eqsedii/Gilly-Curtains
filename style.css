@@ -296,3 +296,14 @@ img.lz.loaded{filter:none;transform:none;animation:none;transition:filter .7s ea
 .hero-top:not(.solid) .brand{opacity:0;pointer-events:none}
 .brand{transition:opacity .3s}
 @media(max-width:600px){.hero{height:50svh;min-height:330px}.hero .btn{padding:.6rem 1.1rem;font-size:.88rem}}
+
+/* ---------- contact: more icons + map buttons ---------- */
+.soc.wa{background:#25d366;border-radius:50%}
+.soc.wa svg{width:26px;height:26px}
+.soc.call{background:var(--blue)}
+.info-list .social{margin-top:.5rem}
+.info-list .social svg{stroke:none}
+.info-list .social .soc.ig svg,.info-list .social .soc.call svg{stroke:#fff;fill:none}
+.info-list .social .soc.fb svg,.info-list .social .soc.wa svg{fill:#fff}
+.info-list .social .soc.ig svg circle:last-child{fill:#fff;stroke:none}
+.map-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem}
