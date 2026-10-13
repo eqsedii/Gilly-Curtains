@@ -286,3 +286,13 @@ img.lz.loaded{filter:none;transform:none;animation:none;transition:filter .7s ea
 .soc.fb{background:#1877f2;border-radius:50%}
 .soc.fb svg{width:26px;height:26px}
 @media(prefers-reduced-motion:reduce){.strip ul.marquee,.btn-primary::before,#loader::after,.cta-band::after{animation:none!important}}
+
+/* ---------- half-screen hero with prominent logo ---------- */
+.hero{height:50svh;min-height:340px;display:grid;place-items:center}
+.hero-inner{padding:1.2rem 0 2.4rem;justify-content:center}
+.hero .hero-logo{display:block;width:clamp(84px,17svh,150px);padding:7px;margin:0 0 .9rem;box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 0 5px rgba(255,255,255,.2)}
+.hero h1{font-size:clamp(1.6rem,5.2vw,3rem);max-width:20ch;line-height:1.12}
+.hero-cta{margin-top:1rem}
+.hero-top:not(.solid) .brand{opacity:0;pointer-events:none}
+.brand{transition:opacity .3s}
+@media(max-width:600px){.hero{height:50svh;min-height:330px}.hero .btn{padding:.6rem 1.1rem;font-size:.88rem}}
