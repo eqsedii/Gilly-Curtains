@@ -74,26 +74,6 @@
   if(lb){ $$('.gallery figure').forEach(function(f){ f.addEventListener('click',function(){ $('img',lb).src=$('img',f).src; lb.classList.add('open') }) });
     lb.addEventListener('click',function(){lb.classList.remove('open')}); document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open')}) }
 
-  /* shop */
-  var grid=$('#products');
-  if(grid && window.GILLY_PRODUCTS){
-    var P=window.GILLY_PRODUCTS, num=window.GILLY_WHATSAPP, fbox=$('#filters');
-    var cats=['All'].concat(P.map(function(p){return p.category}).filter(function(v,i,a){return a.indexOf(v)===i}));
-    function wa(p){ var t='Hello Gilly Interiors, I would like to order: '+p.name+(p.price?' (KES '+p.price.toLocaleString()+')':'')+'. Is it available?'; return 'https://wa.me/'+num+'?text='+encodeURIComponent(t) }
-    function render(cat){
-      grid.innerHTML='';
-      P.filter(function(p){return cat==='All'||p.category===cat}).forEach(function(p){
-        var el=document.createElement('article'); el.className='product reveal in';
-        el.innerHTML='<div class="ph"><img loading="lazy" alt="'+p.name+'" src="'+p.img+'"></div><div class="info"><span class="cat">'+p.category+'</span><h3>'+p.name+'</h3>'+(p.note?'<p style="color:#5d6475;font-size:.88rem">'+p.note+'</p>':'')+
-          '<div class="price">'+(p.price?'KES '+p.price.toLocaleString()+'<small> /=</small>':'<small>Ask for price</small>')+'</div>'+
-          '<a class="btn btn-wa" target="_blank" rel="noopener" href="'+wa(p)+'">Order on WhatsApp</a></div>';
-        grid.appendChild(el);
-      });
-    }
-    if(fbox && cats.length>2){ cats.forEach(function(c,i){ var b=document.createElement('button'); b.textContent=c; if(!i)b.className='active'; b.onclick=function(){ $$('button',fbox).forEach(function(x){x.classList.remove('active')}); b.classList.add('active'); render(c) }; fbox.appendChild(b) }) }
-    render('All');
-  }
-
   /* quote form -> WhatsApp */
   var form=$('#quoteForm');
   if(form){ form.addEventListener('submit',function(e){ e.preventDefault(); var d=new FormData(form);
