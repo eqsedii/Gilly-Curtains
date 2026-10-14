@@ -307,3 +307,11 @@ img.lz.loaded{filter:none;transform:none;animation:none;transition:filter .7s ea
 .info-list .social .soc.fb svg,.info-list .social .soc.wa svg{fill:#fff}
 .info-list .social .soc.ig svg circle:last-child{fill:#fff;stroke:none}
 .map-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem}
+
+/* footer credit */
+.copy .credit{display:inline-block;margin-top:.45rem;font-size:.82rem;opacity:.85}
+.copy .credit strong{color:var(--orange);letter-spacing:.04em}
+
+.dev-wa{display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;padding:.4rem .9rem;border-radius:999px;background:#25d366;color:#07391b;font-size:.82rem;font-weight:600;transition:transform .25s,filter .25s}
+.dev-wa svg{width:16px;height:16px;fill:currentColor}
+.dev-wa:hover{transform:translateY(-2px);filter:brightness(.95);color:#07391b}
