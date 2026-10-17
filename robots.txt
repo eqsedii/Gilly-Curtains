@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://gillyinteriors.co.ke/sitemap.xml
+
+User-agent: *
+Disallow: /admin/
