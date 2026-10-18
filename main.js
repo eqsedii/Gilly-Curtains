@@ -77,6 +77,6 @@
   /* quote form -> WhatsApp */
   var form=$('#quoteForm');
   if(form){ form.addEventListener('submit',function(e){ e.preventDefault(); var d=new FormData(form);
-    var t='Hello Gilly Interiors,%0A*Name:* '+encodeURIComponent(d.get('name'))+'%0A*Service:* '+encodeURIComponent(d.get('service'))+'%0A*Location:* '+encodeURIComponent(d.get('location')||'-')+'%0A*Details:* '+encodeURIComponent(d.get('message')||'-');
+    var t='Hello Gilly Interiors,%0A*Name:* '+encodeURIComponent(d.get('name'))+'%0A*Phone:* '+encodeURIComponent(d.get('phone')||'-')+'%0A*Service:* '+encodeURIComponent(d.get('service'))+'%0A*Location:* '+encodeURIComponent(d.get('location')||'-')+'%0A*Details:* '+encodeURIComponent(d.get('message')||'-');
     window.open('https://wa.me/254705566344?text='+t,'_blank') }) }
 })();

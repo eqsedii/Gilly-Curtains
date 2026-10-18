@@ -21,8 +21,8 @@ function apply(d){
  if(grid&&d.services){var cards=$$(':scope > .card',grid);d.services.forEach(function(s,i){var c=cards[i];if(!c){c=cards[cards.length-1].cloneNode(true);grid.appendChild(c);cards.push(c)}var t=c.querySelector('h3'),p=c.querySelector('p');if(t)t.textContent=s.title;if(p)p.textContent=s.description;c.style.display=''});for(var j=d.services.length;j<cards.length;j++)cards[j].style.display='none'}
 }
 /* Log every quote request / cart order as an enquiry (still opens WhatsApp as before) */
-var wo=window.open;window.open=function(u){try{var m=/wa\.me\/(\d+)\?text=(.*)$/.exec(u||'');if(m){var t=decodeURIComponent(m[2]),n=/\*Name:\*\s*([^\n]*)/.exec(t),sv=/\*Service:\*\s*([^\n]*)/.exec(t);
- if(configured)fetch(URL_+'/rest/v1/enquiries',{method:'POST',keepalive:true,headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({name:n?n[1].trim():'Shop order',topic:sv?sv[1].trim():'Shop order',message:t.slice(0,2500),status:'new'})}).catch(function(){});
+var wo=window.open;window.open=function(u){try{var m=/wa\.me\/(\d+)\?text=(.*)$/.exec(u||'');if(m){var t=decodeURIComponent(m[2]),n=/\*Name:\*\s*([^\n]*)/.exec(t),sv=/\*Service:\*\s*([^\n]*)/.exec(t),ph=/\*Phone:\*\s*([^\n]*)/.exec(t),it=(t.match(/^\d+\.\s.+$/gm)||[]).map(function(x){return x.replace(/^\d+\.\s/,'')});
+ if(configured)fetch(URL_+'/rest/v1/enquiries',{method:'POST',keepalive:true,headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({name:n?n[1].trim().slice(0,100):'Shop order',phone:ph?ph[1].trim().slice(0,30):'',topic:sv?sv[1].trim():(it.length?('Shop: '+it.join(', ')).slice(0,180):'Shop order'),message:t.slice(0,2500),status:'new'})}).catch(function(){});
  if(m[1]===OLD.wa&&NUM!==OLD.wa)arguments[0]=u.replace(OLD.wa,NUM)}}catch(e){}return wo.apply(window,arguments)};
 if(!configured){boot();return}
 var done=false,go=function(d){if(done)return;done=true;try{if(d)apply(d)}catch(e){}boot()};

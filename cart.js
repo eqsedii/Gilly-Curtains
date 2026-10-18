@@ -37,13 +37,14 @@
   function say(m){ toast.textContent=m; toast.classList.add('show'); clearTimeout(say.t); say.t=setTimeout(function(){toast.classList.remove('show')},1600) }
   function openCart(o){ drawer.classList.toggle('open',o); veil.classList.toggle('open',o) }
 
+  var ci=(function(){try{return JSON.parse(localStorage.getItem('gilly_ci'))}catch(e){}})()||{n:'',p:''};
   function drawCart(){
     var keys=Object.keys(cart).filter(find), n=count();
     fab.querySelector('b').textContent=n; fab.classList.toggle('show',n>0);
     var h='<div class="gc-dh"><h3>🛒 Your Cart ('+n+')</h3><button class="gc-x" data-a="close" aria-label="Close">✕</button></div><div class="gc-list">';
     if(!keys.length) h+='<div class="gc-empty"><span>🛍️</span>Your cart is empty.<br>Tap ORDER on any product to add it.</div>';
     keys.forEach(function(k,i){ var p=find(k); h+='<div class="gc-it" style="animation-delay:'+i*.05+'s"><img src="'+p.img+'" alt=""><div>'+esc(p.name)+'<small>'+esc(p.category)+'</small><span class="gc-q"><button data-a="dec" data-k="'+esc(k)+'">−</button><span>'+cart[k]+'</span><button data-a="inc" data-k="'+esc(k)+'">+</button></span></div><button class="gc-rm" data-a="rm" data-k="'+esc(k)+'" aria-label="Remove item">🗑</button></div>' });
-    h+='</div>'; if(keys.length) h+='<div class="gc-df"><button class="gc-order" data-a="send">ORDER NOW</button><button class="gc-clear" data-a="clear">Remove all items</button></div>';
+    h+='</div>'; if(keys.length) h+='<div class="gc-df"><input id="gcName" autocomplete="name" placeholder="Your name" value="'+esc(ci.n)+'" style="width:100%;box-sizing:border-box;padding:.75rem .9rem;border:1.5px solid #d9dde6;border-radius:12px;font:inherit"><input id="gcPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your phone number" value="'+esc(ci.p)+'" style="width:100%;box-sizing:border-box;padding:.75rem .9rem;border:1.5px solid #d9dde6;border-radius:12px;font:inherit"><button class="gc-order" data-a="send">ORDER NOW</button><button class="gc-clear" data-a="clear">Remove all items</button></div>';
     drawer.innerHTML=h;
     document.querySelectorAll('.gc-btn[data-n]').forEach(function(b){ var on=!!cart[b.dataset.n]; b.classList.toggle('added',on); b.textContent=on?'✓ ADDED':'ORDER'; if(b.closest('.gc-card')) b.closest('.gc-card').classList.toggle('on',on) });
     var zb=zoom.querySelector('.gc-btn'); if(zb){ var on=!!cart[zb.dataset.n]; zb.classList.toggle('added',on); zb.textContent=on?'✓ ADDED':'ORDER' }
@@ -61,10 +62,12 @@
     requestAnimationFrame(function(){ var t=fab.getBoundingClientRect(); f.style.left=t.left+'px'; f.style.top=t.top+'px'; f.style.width='30px'; f.style.height='30px'; f.style.opacity='.3' });
     setTimeout(function(){ f.remove(); fab.style.display='' },780);
   }
+  drawer.addEventListener('input',function(e){ if(e.target.id=='gcName')ci.n=e.target.value; if(e.target.id=='gcPhone')ci.p=e.target.value; try{localStorage.setItem('gilly_ci',JSON.stringify(ci))}catch(x){} });
   function send(){
     var keys=Object.keys(cart).filter(find); if(!keys.length) return;
+    var nm=(ci.n||'').trim(),ph=(ci.p||'').replace(/[^\d+]/g,''); if(nm.length<2||ph.length<9){ say('Please enter your name and phone number'); var f=document.getElementById(nm.length<2?'gcName':'gcPhone'); if(f) f.focus(); return }
     var t='Hello Gilly Interiors, I would like a quote for:\n\n'; keys.forEach(function(k,i){ t+=(i+1)+'. '+k+' x'+cart[k]+'\n' });
-    t+='\nPlease share availability, prices and delivery. Thank you!';
+    t+='\n*Name:* '+nm+'\n*Phone:* '+ph+'\n\nPlease share availability, prices and delivery. Thank you!';
     window.open('https://wa.me/'+NUM+'?text='+encodeURIComponent(t),'_blank');
   }
 
