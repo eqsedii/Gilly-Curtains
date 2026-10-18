@@ -3,7 +3,7 @@
 var URL_='https://rjwprkdhioavtzdggndu.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqd3Bya2RoaW9hdnR6ZGdnbmR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyMzk2NzUsImV4cCI6MjEwNzgxNTY3NX0.Z6ws6fRZEMoaRPwhAnxyCtVP0iT1i15VWho2ba1b-jo',OLD={phone:'+254 705 566 344',wa:'254705566344',addr:'Kaiyoni Building, opposite Litein Boys Senior School, Litein Town, Kericho County'},CK='gilly_live_v1';
 var H={apikey:KEY,Authorization:'Bearer '+KEY},configured=KEY.indexOf('YOUR_')<0,NUM=OLD.wa;
 function get(t,q){return fetch(URL_+'/rest/v1/'+t+'?'+q,{headers:H}).then(function(r){if(!r.ok)throw 0;return r.json()})}
-function boot(){var s=document.createElement('script');s.src='./main.js';s.async=false;document.body.appendChild(s);var c=document.createElement('script');c.src='./cart.js';c.async=false;document.body.appendChild(c)}
+function boot(){var s=document.createElement('script');s.src='./main.js?v=20261018';s.async=false;document.body.appendChild(s);var c=document.createElement('script');c.src='./cart.js?v=20261018';c.async=false;document.body.appendChild(c)}
 function $$(s,c){return [].slice.call((c||document).querySelectorAll(s))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function apply(d){
